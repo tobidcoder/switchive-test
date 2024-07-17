@@ -12,7 +12,7 @@ console.log(configService.get('POSTGRESQL_DB_HOST'))
     isGlobal: true,
   }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: configService.get('POSTGRESQL_DB_HOST'),
       port: configService.get('POSTGRESQL_DB_PORT'),
       password: configService.get('POSTGRESQL_DB_PASSWORD'),
