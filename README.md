@@ -45,6 +45,15 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Test on Swager docs or postman
+
+```Swagger
+# Switchive Api Docs
+$ http://localhost:3000/api
+
+```
+
+
 ## Test
 
 ```bash

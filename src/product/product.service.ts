@@ -34,13 +34,13 @@ export class ProductService extends BaseService {
    */
   //    name, description, price, image_url
 
-  async createProduct(res,createProductDto: CreateProductDto): Promise<Product> {
+  async createProduct(res, createProductDto: CreateProductDto): Promise<Product> {
     const product: Product = new Product();
     product.name = createProductDto.name;
     product.description = createProductDto.description;
     product.price = createProductDto.price;
     product.image_url = createProductDto.image_url;
- 
+
     return await this.creates(res, product, "Product created successful");
   }
 
@@ -48,8 +48,8 @@ export class ProductService extends BaseService {
    * this function is used to get all the product's list
    * @returns promise of array of products
    */
-   async  findAllProduct(res){
-    return await this.findAlls(res,"Product get successful")
+  async findAllProduct(res,page,per_page) {
+    return await this.paginates(res, page, per_page, "Product get successful")
   }
 
   /**
@@ -57,8 +57,8 @@ export class ProductService extends BaseService {
    * @param id is type of number, which represent the id of product.
    * @returns promise of product
    */
-   async  viewProduct(res,id: number): Promise<Product> {
-    return await this.findOnes(res,{where:{id}},"Product get successful")
+  async viewProduct(res, id: number): Promise<Product> {
+    return await this.findOnes(res, { where: { id } }, "Product get successful")
   }
 
   /**
@@ -68,7 +68,7 @@ export class ProductService extends BaseService {
    * @param updateProductDto this is partial type of createProductDto.
    * @returns promise of udpate product
    */
-   async updateProduct(res,id: number, updateProductDto: UpdateProductDto): Promise<Product> {
+  async updateProduct(res, id: number, updateProductDto: UpdateProductDto): Promise<Product> {
 
     const product: Product = new Product();
     product.name = updateProductDto.name;
@@ -85,8 +85,8 @@ export class ProductService extends BaseService {
    * @param id is the type of number, which represent id of product
    * @returns nuber of rows deleted or affected
    */
-   async removeProduct(res,id: number) {
-    return await this.removes(res,id,"Product Deleted")
+  async removeProduct(res, id: number) {
+    return await this.removes(res, id, "Product Deleted")
   }
 }
 

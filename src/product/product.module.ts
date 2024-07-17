@@ -9,6 +9,6 @@ import { Product } from './entities/product.entity';
   controllers: [ProductController],
   providers: [ProductService],
 })
-export class ProductModule {}
+export class ProductModule { }
 
 

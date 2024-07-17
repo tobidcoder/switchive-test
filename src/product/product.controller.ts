@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import {ApiTags} from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
 
 
@@ -13,9 +13,9 @@ import {ApiTags} from '@nestjs/swagger';
  * passed in controller decorator.
  * in our case our base URL is http://localhost:3000/product
  */
- @Controller('product')
- export class ProductController {
-   constructor(private readonly productService: ProductService) {}
+@Controller('product')
+export class ProductController {
+  constructor(private readonly productService: ProductService) { }
 
   /**
    * Post decorator represents method of request as we have used post decorator the method
@@ -24,8 +24,8 @@ import {ApiTags} from '@nestjs/swagger';
    * POST http://localhost:3000/product
    */
   @Post()
-  create(@Res({ passthrough: true }) res: Response,@Body() createProductDto: CreateProductDto) {
-    return this.productService.createProduct(res,createProductDto);
+  create(@Res({ passthrough: true }) res: Response, @Body() createProductDto: CreateProductDto) {
+    return this.productService.createProduct(res, createProductDto);
   }
 
   /**
@@ -34,8 +34,8 @@ import {ApiTags} from '@nestjs/swagger';
    * GET http://localhost:3000/product
    */
   @Get()
-  findAll(@Res({ passthrough: true }) res: Response) {
-    return this.productService.findAllProduct(res);
+  findAll(@Res({ passthrough: true }) res: Response, @Query('page') page: number, @Query('per_page') per_page: number,) {
+    return this.productService.findAllProduct(res,page,per_page);
   }
 
   /**
@@ -45,7 +45,7 @@ import {ApiTags} from '@nestjs/swagger';
    */
   @Get(':id')
   findOne(@Res({ passthrough: true }) res: Response, @Param('id') id: string) {
-    return this.productService.viewProduct(res,+id);
+    return this.productService.viewProduct(res, +id);
   }
 
   /**
